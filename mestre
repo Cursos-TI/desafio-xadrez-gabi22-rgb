@@ -1,0 +1,109 @@
+/*Você deverá modificar o programa em C, que já contém a movimentação da Torre, Bispo, Rainha e Cavalo, realizando as seguintes alterações:
+Recursividade: Substitua os loops simples que controlam os movimentos da Torre, Bispo e Rainha por funções recursivas. 
+Cada função recursiva deverá simular o movimento da respectiva peça, imprimindo a direção correta a cada casa.
+ Requisitos funcionais
+ Entrada de Dados: Os valores para o número de casas a serem movidas (para recursão) e as condições dos loops (para o Cavalo) devem ser definidos diretamente no código,
+  como variáveis ou constantes.
+Loops Complexos para o Cavalo: Aprimore a movimentação do Cavalo, utilizando loops aninhados com múltiplas variáveis e/ou condições.
+ Você pode usar continue e break para controlar o fluxo do loop de forma mais precisa.
+  O movimento do Cavalo agora será para cima e para a direita, em "L" (duas casas para cima e uma para a direita).
+Bispo com Loops Aninhados: O Bispo deve ser implementado com recursividade, e também com loops aninhados, 
+utilizando o loop mais externo para o movimento vertical, e o mais interno para o movimento horizontal.
+Requisitos funcionais
+Entrada de Dados: Os valores para o número de casas a serem movidas (para recursão) e as condições dos loops (para o Cavalo) devem ser definidos diretamente no código,
+ como variáveis ou constantes.Recursividade (Torre, Bispo e Rainha): Implemente funções recursivas para simular o movimento de cada peça, substituindo os loops originais.
+Loops Complexos (Cavalo): Utilize loops aninhados com múltiplas variáveis e/ou condições para simular o movimento do Cavalo em "L" (duas casas para cima e uma para a direita). 
+Loops Aninhados (Bispo): Utilize loops aninhados para o bispo, sendo o loop mais externo o vertical, e o mais interno o horizontal.
+ Saída de Dados: O programa deverá imprimir no console, de forma clara e organizada, a direção do movimento a cada casa percorrida por cada peça. Utilize o comando printf para exibir
+ as informações. As saídas devem seguir o padrão: printf("Cima\n");, printf("Baixo\n");, printf("Esquerda\n");, printf("Direita\n");.
+  Utilize linhas em branco para separar a saída de cada peça.
+Você deverá modificar o programa em C, que já contém a movimentação da Torre, Bispo, Rainha e Cavalo, realizando as seguintes alterações:
+Recursividade: Substitua os loops simples que controlam os movimentos da Torre, Bispo e Rainha por funções recursivas.
+ Cada função recursiva deverá simular o movimento da respectiva peça, imprimindo a direção correta a cada casa.
+Loops Complexos para o Cavalo: Aprimore a movimentação do Cavalo, utilizando loops aninhados com múltiplas variáveis e/ou condições. 
+Você pode usar continue e break para controlar o fluxo do loop de forma mais precisa.
+ O movimento do Cavalo agora será para cima e para a direita, em "L" (duas casas para cima e uma para a direita).
+Bispo com Loops Aninhados: O Bispo deve ser implementado com recursividade,
+ e também com loops aninhados, utilizando o loop mais externo para o movimento vertical, e o mais interno para o movimento horizontal.
+  Saída de Dados: O programa deverá imprimir no console, de forma clara e organizada, a direção do movimento a cada casa percorrida por cada peça.
+   Utilize o comando printf para exibir as informações. As saídas devem seguir o padrão: printf("Cima\n");, printf("Baixo\n");, printf("Esquerda\n");, printf("Direita\n");. 
+   Utilize linhas em branco para separar a saída de cada peça.
+ Requisitos não funcionais
+ Performance: O código deve ser eficiente e executar sem atrasos perceptíveis. Evite chamadas recursivas excessivas que possam levar a um estouro de pilha (stack overflow).
+ Documentação: O código deve ser bem documentado, com comentários detalhados explicando a lógica da recursividade,
+  o funcionamento dos loops complexos e o propósito de cada variável e condição.
+ Legibilidade: O código deve ser claro, organizado e fácil de entender, com nomes de variáveis descritivos e indentação adequada. Utilize apenas variáveis do tipo inteiro e string.
+ */
+#include <stdio.h>
+#include <stdlib.h>
+
+// Simulação do movimento da Torre
+void movimento_torre(int casas) { // A Torre se move horizontalmente e verticalmente
+    if (casas <= 0) return; 
+    printf("Direita\n");
+    movimento_torre(casas - 1); // Chamada recursiva para continuar o movimento
+}
+
+    // Simulação do movimento do Bispo
+void movimento_bispo(int casas) { // O Bispo se move diagonalmente
+    if (casas <= 0) return;
+    for (int i = 0; i < casas; i++) { // Loop externo para o movimento vertical
+        for (int j = 0; j < casas; j++) { // Loop interno para o movimento horizontal
+            if (i == j) {
+                printf("Cima, Esquerda\n");
+            } else if (i + j == casas - 1) {
+                printf("Cima, Direita\n");
+            }
+        }
+        printf("Cima, Direita\n");
+    }
+}
+
+ // Simulação do movimento da Rainha
+void movimento_rainha(int casas) { // A Rainha se move em todas as direções
+    if (casas <= 0) return; 
+    movimento_rainha(casas - 1);// Chamada recursiva para continuar o movimento
+    printf("Cima, Direita\n"); 
+    printf("Cima, Esquerda\n");
+    printf("Baixo, Direita\n");
+    printf("Baixo, Esquerda\n");
+}
+// Simulação do movimento do Cavalo
+void movimento_cavalo(int casas) { // O Cavalo se move em "L"
+    if (casas <= 0) return;
+    for (int i = 0; i < casas; i++) { // Loop externo para o movimento vertical
+        for (int j = 0; j < casas; j++) { // Loop interno para o movimento horizontal
+            if (i == 2 && j == 1) {// Movimento do Cavalo para cima e direita
+                printf("Cima, Direita\n");// Duas casas para cima e uma para a direita
+            } else if (i == 1 && j == 0) {// Movimento do Cavalo para cima e esquerda
+                printf("Cima, Esquerda\n");// Duas casas para cima e uma para a esquerda
+            } else if (i == 1 && j == 2) {// Movimento do Cavalo para baixo e direita
+                printf("Baixo, Esquerda\n");
+            }
+        }
+    }
+}
+int main() {
+    int casas_torre = 3; // Número de casas para a Torre
+    int casas_bispo = 2; // Número de casas para o Bispo
+    int casas_rainha = 1; // Número de casas para a Rainha
+    int casas_cavalo = 2; // Número de casas para o Cavalo
+
+    printf("Movimento da Torre:\n");
+    movimento_torre(casas_torre);
+    printf("\n");
+
+    printf("Movimento do Bispo:\n");
+    movimento_bispo(casas_bispo);
+    printf("\n");
+
+    printf("Movimento da Rainha:\n");
+    movimento_rainha(casas_rainha);
+    printf("\n");
+
+    printf("Movimento do Cavalo:\n");
+    movimento_cavalo(casas_cavalo);
+    printf("\n");
+
+    return 0;
+} // Fim do programa
